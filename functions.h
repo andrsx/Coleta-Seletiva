@@ -4,11 +4,11 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include<stb_image.h>
 #include "drawings.h"
 
 GLfloat tx, ty = 0;
 GLfloat win = 70;
+GLfloat R = 1, G = 0, B = 0;
 
 void Inicializa(void){
 	
@@ -17,6 +17,31 @@ void Inicializa(void){
 	gluOrtho2D(-20.0,20.0,-20.0,20.0);
 	void glPointSize(GLfloat size);
 	
+}
+
+void GerenciaTeclado(unsigned char key, int x, int y)
+{
+    switch (key) {
+            case 'R': 
+            case 'r':// muda a cor da lata pra vermelho
+                     R = 1;
+                     G = 0;
+                     B = 0;
+                     break;
+            case 'G':
+            case 'g':// muda a cor da lata para verde
+                     R = 0;
+                     G = 1;
+                     B = 0;
+                     break;
+            case 'B':
+            case 'b':// muda a cor da lata para azul
+                     R = 0;
+                     G = 0;
+                     B = 1;
+                     break;
+    }
+    glutPostRedisplay();
 }
 
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
@@ -87,7 +112,8 @@ void Desenha(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
-	
+	glEnable(GL_BLEND);                                   //Transparência
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
 	//glPushMatrix();
 	//glTranslatef(tx,ty,0.0f);	
 	//ponto();
@@ -95,11 +121,14 @@ void Desenha(void){
 	//glPopMatrix();
 	
 	glPushMatrix();
-	//glTranslatef(5.0f,5.0f,0.0f);	
-	contornolatalixo();
-	latalixo();
+	glTranslatef(tx,ty,0.0f);	
+	contornoLataLixo();
+	latalixo(R,G,B);
+	sombraSimboloLataLixo();
+	simboloLataLixo();
+	luzLataLixo();
+	sombraLataLixo();
 	glPopMatrix();
-	
 	
 	glFlush();
 	

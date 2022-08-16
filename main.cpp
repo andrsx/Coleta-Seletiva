@@ -15,9 +15,8 @@ int main(void){
 	glutReshapeFunc(AlteraTamanhoJanela);
 	Inicializa();
 	glutSpecialFunc(TeclasEspeciais);
-	//glutKeyboardFunc(Teclado);
+	glutKeyboardFunc(GerenciaTeclado);
 	//glutMouseFunc(GerenciaMouse);
-	
 	
 	glutMainLoop();
 }
