@@ -6,6 +6,78 @@
 #include <stdio.h>
 #include "drawings.h"
 
+
+// Tamanho e posição inicial do quadrado
+GLfloat x1 = 0.0f;
+GLfloat y1 = 40.0f;
+GLsizei rsize = 1;   
+
+// Tamanho do incremento nas direções x e y 
+// (número de pixels para se mover a cada
+// intervalo de tempo)
+GLfloat xstep = 1.0f;
+GLfloat ystep = 1.0f;
+
+void quadrado(){
+	 glColor3f(1.0f, 0.0f, 0.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
+void quadrado2(){
+	 glColor3f(1.0f, 1.0f, 0.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
+void quadrado3(){
+	 glColor3f(0.0f, 0.0f, 0.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
+void quadrado4(){
+	 glColor3f(0.0f, 0.0f, 1.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
+void quadrado5(){
+	 glColor3f(0.0f, 1.0f, 1.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
+void quadrado6(){
+	 glColor3f(0.0f, 1.0f, 0.0f);
+     glBegin(GL_QUADS);
+               glVertex2i(x1,y1+rsize); 
+               glVertex2i(x1,y1);
+               glVertex2i(x1+rsize,y1);
+               glVertex2i(x1+rsize,y1+rsize);               
+     glEnd();
+}
+
 void ponto(){
 	glColor3f(0.0f, 0.0f, 0.0f);
 	glPointSize(5.0f);
