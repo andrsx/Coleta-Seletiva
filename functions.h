@@ -4,11 +4,13 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "drawings.h"
 
 GLfloat tx, ty = 0;
 GLfloat win = 70;
 GLfloat R = 1, G = 0, B = 0;
+int numFigura;
 
 void Inicializa(void){
 	
@@ -17,6 +19,23 @@ void Inicializa(void){
 	gluOrtho2D(-20.0,20.0,-20.0,20.0);
 	void glPointSize(GLfloat size);
 	
+}
+
+void figuras (){
+	switch(numFigura){
+		case 0: quadrado();
+			break;
+		case 1: quadrado2();
+			break;
+		case 2: quadrado3();
+			break;
+		case 3: quadrado4();
+			break;
+		case 4: quadrado5();
+			break;
+		case 5: quadrado6();
+			break;
+	}
 }
 
 void GerenciaTeclado(unsigned char key, int x, int y)
@@ -44,9 +63,26 @@ void GerenciaTeclado(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
+void Timer(int value)
+{    
+	
+    y1 -= ystep;   
+    glutPostRedisplay();
+    glutTimerFunc(20,Timer, 1);
+    
+ 
+    if( y1<-40){
+     	x1 = -20 + (rand() % 30); //varia a posição
+        y1 = 40.0f;//posiçao fixa
+        
+        numFigura = rand()%6;
+     }
+}
+
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 {
-	GLsizei largura, altura;
+
+	 GLsizei largura, altura;
 
 	if(h == 0) h = 1;
 
@@ -112,8 +148,8 @@ void Desenha(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_BLEND);                                   //Transpar�ncia
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transpar�ncia
+	glEnable(GL_BLEND);                                   //Transparência
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
 	//glPushMatrix();
 	//glTranslatef(tx,ty,0.0f);	
 	//ponto();
@@ -129,6 +165,9 @@ void Desenha(void){
 	luzLataLixo();
 	sombraLataLixo();
 	glPopMatrix();
+	glPushMatrix();
+	figuras();
+    glPopMatrix();
 	
 	glFlush();
 	
