@@ -13,6 +13,7 @@ int main(void){
 	glutCreateWindow("Projeto Final");
 	glutDisplayFunc(Desenha);
 	glutReshapeFunc(AlteraTamanhoJanela);
+	glutTimerFunc(33, Timer, 1);
 	Inicializa();
 	glutSpecialFunc(TeclasEspeciais);
 	glutKeyboardFunc(GerenciaTeclado);
