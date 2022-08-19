@@ -10,38 +10,189 @@
 GLfloat tx, ty = 0;
 GLfloat win = 70;
 GLfloat R = 1, G = 0, B = 0;
+GLfloat pontuacao = 0.0;
+GLfloat vidas = 5.0;
 int numFigura;
 
 void Inicializa(void){
-	
+
 	glClearColor(1.5f, 1.0f, 1.0f, 1.0f);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(-20.0,20.0,-20.0,20.0);
 	void glPointSize(GLfloat size);
-	
+
+}
+
+void addPontuacao()
+{
+    glColor3f(0,0,0);
+
+	glPushMatrix();
+    glColor3f(0.0,0.0,0.0);
+
+	sprintf(textoPontuacao, "Pontuacao: %.1f", pontuacao);
+
+    glTranslatef(-38.0f, 36.0f,0.0f);
+    glRasterPos2f(0,0);
+    DesenhaTexto(GLUT_BITMAP_9_BY_15,textoPontuacao);
+    glPopMatrix();
+}
+
+void addVidas(){
+    glColor3f(0,0,0);
+
+	glPushMatrix();
+    glColor3f(0.0,0.0,0.0);
+
+	sprintf(textoVidas, "Vidas: %.1f", vidas);
+
+    glTranslatef(-38.0f, 30.0f,0.0f);
+    glRasterPos2f(0,0);
+    DesenhaTexto(GLUT_BITMAP_9_BY_15,textoVidas);
+    glPopMatrix();
+}
+
+
+void exibeCoordenada(float tx, float ty){
+
+	float x = tx;
+	float y = ty;
+
+	printf("x: %0.2f ", x);
+	printf("y: %0.2f \n", y);
+
+}
+
+
+bool colorMatch(GLfloat qR, GLfloat qG,GLfloat qB){
+    if(qR == R && qG == G && qB == B){
+        return true;
+    }
+
+    return false;
+}
+
+bool colisao(){
+
+    if((x1 >= tx && x1 <= tx + 5) && y1 == ty + 5){
+
+        return true;
+    } else if((x1 <= tx && x1 >= tx - 5) && y1 == ty + 5){
+
+        return true;
+    }
+
+    return false;
 }
 
 void figuras (){
+    bool result = false;
 	switch(numFigura){
-		case 0: quadrado();
-			break;
-		case 1: quadrado2();
-			break;
-		case 2: quadrado3();
-			break;
-		case 3: quadrado4();
-			break;
-		case 4: quadrado5();
-			break;
-		case 5: quadrado6();
-			break;
+		case 0:{
+                quadrado0();
+            bool result = colisao();
+            if(result){
+                if(colorMatch(q0R, q0G, q0B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q0O = 0;
+            }else if(y1 == 0 - 6 &&  q0O == 1){
+                q0O = 0;
+                vidas--;
+            }
+          }
+        break;
+		case 1:{
+            quadrado1();
+            result = colisao();
+            if(result){
+                if(colorMatch(q1R, q1G, q1B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q1O = 0;
+            }else if(y1 == 0 - 6 &&  q1O == 1){
+                q1O = 0;
+                vidas--;
+            }
+		   }
+        break;
+		case 2:{
+            quadrado2();
+            result = colisao();
+            if(result){
+                if(colorMatch(q2R, q2G, q2B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q2O = 0;
+            }else if(y1 == 0 - 6 &&  q2O == 1){
+                q2O = 0;
+                vidas--;
+            }
+        }
+        break;
+		case 3: {
+            quadrado3();
+            result = colisao();
+            if(result){
+                if(colorMatch(q3R, q3G, q3B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q3O = 0;
+            }else if(y1 == 0 - 6 &&  q3O == 1){
+                q3O = 0;
+                vidas--;
+            }
+        }
+        break;
+		case 4:  {
+            quadrado4();
+            result = colisao();
+            if(result){
+                if(colorMatch(q4R, q4G, q4B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q4O = 0;
+            }else if(y1 == 0 - 6 &&  q4O == 1){
+                q4O = 0;
+                vidas--;
+            }
+        }
+        break;
+		case 5: {
+            quadrado5();
+            result = colisao();
+            if(result){
+                if(colorMatch(q5R, q5G, q5B)){
+                    pontuacao++;
+                }else {
+                    vidas--;
+                }
+                q5O = 0;
+            }else if(y1 == 0 - 6 &&  q5O == 1){
+                q5O = 0;
+                vidas--;
+            }
+        }
+        break;
+
 	}
+
 }
 
 void GerenciaTeclado(unsigned char key, int x, int y)
 {
     switch (key) {
-            case 'R': 
+            case 'R':
             case 'r':// muda a cor da lata pra vermelho
                      R = 1;
                      G = 0;
@@ -63,19 +214,42 @@ void GerenciaTeclado(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void Timer(int value)
-{    
-	
-    y1 -= ystep;   
+void habilitarCorFugura(){
+    switch(numFigura){
+    case 0:
+        q0O = 1;
+    break;
+    case 1:
+        q1O = 1;
+    break;
+    case 2:
+        q2O = 1;
+    break;
+    case 3:
+        q3O = 1;
+    break;
+    case 4:
+        q4O = 1;
+    break;
+    case 5:
+        q5O = 1;
+    break;
+    }
+}
+
+void Timer(int value){
+
+    y1 -= ystep;
     glutPostRedisplay();
     glutTimerFunc(20,Timer, 1);
-    
- 
+
+
     if( y1<-40){
-     	x1 = -20 + (rand() % 30); //varia a posiÃ§Ã£o
-        y1 = 40.0f;//posiÃ§ao fixa
-        
+     	x1 = -20 + (rand() % 30); //varia a posição
+        y1 = 40.0f;//posiçao fixa
+
         numFigura = rand()%6;
+        habilitarCorFugura();
      }
 }
 
@@ -94,70 +268,63 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	if (largura <= altura) 
+	if (largura <= altura)
 		gluOrtho2D (-40.0f, 40.0f, -40.0f*altura/largura, 40.0f*altura/largura);
-	else 
+	else
 		gluOrtho2D (-40.0f*largura/altura, 40.0f*largura/altura, -40.0f, 40.0f);
-}
-
-void exibeCoordenada(float tx, float ty){
-	
-	float x = tx;
-	float y = ty;
-	
-	printf("x: %0.2f ", x);
-	printf("y: %0.2f \n", y);
-
 }
 
 void TeclasEspeciais(int key, int x, int y)
 {
-	
+
+float p = tx;
+
 	if(key == GLUT_KEY_LEFT)
 	{
 		tx-=1;
 		if ( tx < -win )
-			tx = -win; 
+			tx = -win;
 	}
 	if(key == GLUT_KEY_RIGHT)
 	{
 		tx+=1;
 		if ( tx > win )
-			tx = win; 
-	}     
+			tx = win;
+	}
 	if(key == GLUT_KEY_UP)
 	{
 		ty+=1;
 		if ( ty > win )
-			ty = win; 
+			ty = win;
 	}
 	if(key == GLUT_KEY_DOWN)
 	{
 		ty-=1;
 		if ( ty < -win )
-			ty = -win; 
+			ty = -win;
 	}
-	
-	exibeCoordenada(tx, ty);
+
 
 	glutPostRedisplay();
 }
+
 
 void Desenha(void){
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_BLEND);                                   //TransparÃªncia
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //TransparÃªncia
+	glEnable(GL_BLEND);                                   //Transparência
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
 	//glPushMatrix();
-	//glTranslatef(tx,ty,0.0f);	
+	//glTranslatef(tx,ty,0.0f);
 	//ponto();
 	//latalixo();
 	//glPopMatrix();
-	
+	addPontuacao();
+	addVidas();
 	glPushMatrix();
-	glTranslatef(tx,ty,0.0f);	
+	glTranslatef(tx,ty,0.0f);
 	contornoLataLixo();
 	latalixo(R,G,B);
 	sombraSimboloLataLixo();
@@ -168,9 +335,11 @@ void Desenha(void){
 	glPushMatrix();
 	figuras();
     glPopMatrix();
-	
+
 	glFlush();
-	
+
 }
+
+
 
 #endif
