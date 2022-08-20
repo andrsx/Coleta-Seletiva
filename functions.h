@@ -241,11 +241,11 @@ void Timer(int value){
 
     y1 -= ystep;
     glutPostRedisplay();
-    glutTimerFunc(20,Timer, 1);
+    glutTimerFunc(40,Timer, 1);
 
 
     if( y1<-40){
-     	x1 = -20 + (rand() % 30); //varia a posição
+     	x1 = -70 + (rand() % 70); //varia a posição
         y1 = 40.0f;//posiçao fixa
 
         numFigura = rand()%6;
@@ -281,30 +281,17 @@ float p = tx;
 
 	if(key == GLUT_KEY_LEFT)
 	{
-		tx-=1;
+		tx-=3;
 		if ( tx < -win )
 			tx = -win;
 	}
 	if(key == GLUT_KEY_RIGHT)
 	{
-		tx+=1;
+		tx+=3;
 		if ( tx > win )
 			tx = win;
 	}
-	if(key == GLUT_KEY_UP)
-	{
-		ty+=1;
-		if ( ty > win )
-			ty = win;
-	}
-	if(key == GLUT_KEY_DOWN)
-	{
-		ty-=1;
-		if ( ty < -win )
-			ty = -win;
-	}
-
-
+	
 	glutPostRedisplay();
 }
 
@@ -317,13 +304,14 @@ void Desenha(void){
 	glEnable(GL_BLEND);                                   //Transparência
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
 	//glPushMatrix();
-	//glTranslatef(tx,ty,0.0f);
 	//ponto();
-	//latalixo();
 	//glPopMatrix();
 	addPontuacao();
 	addVidas();
 	glPushMatrix();
+	//glTranslatef(tx,ty,0.0f);
+	
+	//lata de lixo
 	glTranslatef(tx,ty,0.0f);
 	contornoLataLixo();
 	latalixo(R,G,B);
@@ -332,6 +320,44 @@ void Desenha(void){
 	luzLataLixo();
 	sombraLataLixo();
 	glPopMatrix();
+	
+	//banana
+	glPushMatrix();
+	glScalef(0.5f, 0.5f, 1.0f);
+	banana();
+	contornoBanana();
+	luzBanana();
+	sombraBanana();
+	glPopMatrix();
+	
+	//garrafa
+	glPushMatrix();
+	glScalef(1.5f, 1.5f, 1.5f);
+	glTranslatef(10.0f,0.0f,0.0f);
+	garrafa();
+	contornoGarrafa();
+	glPopMatrix();
+	
+	//papel
+	glPushMatrix();
+	glTranslatef(25.0f,-1.5f,0.0f);
+	glScalef(0.6f, 0.6f, 0.6f);
+	papelContorno();
+	papel();
+	papelLinhas();
+	papelDetalhes();
+	sombraPapel();
+	glPopMatrix();
+	
+	//taca
+	glPushMatrix();
+	glScalef(0.2f, 0.2f, 0.2f);
+	glTranslatef(-60.0f,0.0f,0.0f);
+	taca();
+	contornoTaca();
+	glPopMatrix();
+	
+	//figuras
 	glPushMatrix();
 	figuras();
     glPopMatrix();
