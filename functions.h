@@ -357,6 +357,12 @@ void Desenha(void){
 	contornoTaca();
 	glPopMatrix();
 	
+	glPushMatrix();
+	glTranslatef(35.0f,0.0f,0.0f);
+	glScalef(0.7f, 0.7f, 0.7f);
+	bateria();
+	glPopMatrix();
+	
 	//figuras
 	glPushMatrix();
 	figuras();

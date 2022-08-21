@@ -1447,4 +1447,124 @@ glBegin(GL_QUADS);
 	glEnd();	
 }
 
+/* -----------------------------*/
+/* ---------- BATERIA  -------- */
+/* -----------------------------*/
+
+void bateria(){
+	
+	glBegin(GL_POINTS);
+		//Contorno - parte 1 (cima)
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glVertex2f(0.0f,3.0f);
+		glVertex2f(0.5f,3.0f);
+		glVertex2f(1.0f,2.5f);
+		glVertex2f(1.0f,2.0f);
+		glVertex2f(-0.5f,3.0f);
+		glVertex2f(-1.0f,2.5f);
+		glVertex2f(-1.0f,2.0f);
+	glEnd();
+	
+	glBegin(GL_QUADS);
+		//Contorno - parte 2 (horizontal)
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glVertex2f(3.0f,-4.5f);
+		glVertex2f(3.0f,2.0f);
+		glVertex2f(-3.0f,2.0f);
+		glVertex2f(-3.0f,-4.5f);
+	glEnd();
+	
+	glBegin(GL_QUADS);
+		//Contorno - parte 3 (vertical)
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glVertex2f(2.5f,-5.0f);
+		glVertex2f(2.5f,2.5f);
+		glVertex2f(-2.5f,2.5f);
+		glVertex2f(-2.5f,-5.0f);
+	glEnd();
+	
+	glPointSize(5.0f);
+	glBegin(GL_POINTS);
+		//Bateria parte 1 (cima)
+		glColor3f(0.9f, 0.9f, 0.9f);
+		glVertex2f(0.5f,2.5f);   
+		glVertex2f(0.0f,2.5f);   
+		glVertex2f(-0.5f,2.5f);
+		glVertex2f(-0.5f,2.0f);
+		glVertex2f(0.0f,2.0f);
+		glVertex2f(0.5f,2.0f);
+	glEnd();
+	
+	glBegin(GL_QUADS);
+		//Bateria parte 2 (baixo)
+		glColor3f(0.9f, 0.9f, 0.9f);
+		glVertex2f(2.5f,-4.5f);
+		glVertex2f(2.5f,2.0f);
+		glVertex2f(-2.5f,2.0f);
+		glVertex2f(-2.5f,-4.5f);
+	glEnd();
+	
+	glBegin(GL_POINTS);
+		//parte 4 - raio contorno
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glVertex2f(0.5f,0.5f);
+		glVertex2f(0.0f,0.0f);
+		glVertex2f(-0.5f,-0.5f);
+		glVertex2f(-1.0f,-1.0f);
+		glVertex2f(-1.5f,-1.5f);
+		glVertex2f(-1.5f,-2.0f);
+		glVertex2f(-1.0f,-2.0f);
+		glVertex2f(-0.5f,-2.0f);
+		glVertex2f(0.0f,-2.0f);
+		glVertex2f(-0.5f,-2.5f);
+		glVertex2f(-1.0f,-3.0f);
+		glVertex2f(-1.0f,-3.5f);
+		glVertex2f(-0.5f,-3.5f);
+		glVertex2f(0.0f,-3.0f);
+		glVertex2f(0.5f,-2.5f);
+		glVertex2f(1.0f,-2.0f);
+		glVertex2f(1.5f,-1.5f);
+		glVertex2f(1.5f,-1.0f);
+		glVertex2f(1.0f,-1.0f);
+		glVertex2f(0.5f,-1.0f);
+		glVertex2f(0.0f,-1.0f);
+		glVertex2f(0.5f,-0.5f);
+		glVertex2f(1.0f,0.0f);
+		glVertex2f(1.0f,0.5f);
+	glEnd();
+	
+	glBegin(GL_POINTS);
+		//Raio
+		glColor3f(1.0f, 1.0f, 0.0f);
+		glVertex2f(0.5f,0.0f);
+		glVertex2f(0.0f,-0.5f);
+		glVertex2f(-0.5f,-1.0f);
+		glVertex2f(-1.0f,-1.5f);
+		glVertex2f(-0.5f,-1.5f);
+		glVertex2f(0.0f,-1.5f);
+		glVertex2f(0.5f,-1.5f);
+		glVertex2f(1.0f,-1.5f);
+		glVertex2f(0.5f,-2.0f);
+		glVertex2f(0.0f,-2.5f);
+		glVertex2f(-0.5f,-3.0f);
+	glEnd();
+
+	glBegin(GL_QUADS);
+		//Iluminação 1
+		glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		glVertex2f(-2.0f,-1.0f);
+		glVertex2f(-2.0f,2.0f);
+		glVertex2f(-2.5f,2.0f);
+		glVertex2f(-2.5f,-1.0f);
+		//Iluminação 2
+		glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		glVertex2f(-0.5f,1.5f);
+		glVertex2f(-0.5f,2.0f);
+		glVertex2f(-2.0f,2.0f);
+		glVertex2f(-2.0f,1.5f);
+	glEnd();
+
+}
+
+
 #endif
