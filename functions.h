@@ -352,11 +352,20 @@ void Desenha(void){
 	//taca
 	glPushMatrix();
 	glScalef(0.2f, 0.2f, 0.2f);
-	glTranslatef(-60.0f,0.0f,0.0f);
+	glTranslatef(-90.0f,0.0f,0.0f);
 	taca();
 	contornoTaca();
 	glPopMatrix();
 	
+	//latinha
+	glPushMatrix();
+	glScalef(0.2f, 0.2f, 0.2f);
+	glTranslatef(-60.0f,0.0f,0.0f);
+	latinha();
+	glPopMatrix();
+
+	
+	//bateria
 	glPushMatrix();
 	glTranslatef(35.0f,0.0f,0.0f);
 	glScalef(0.7f, 0.7f, 0.7f);

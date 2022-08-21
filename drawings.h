@@ -1566,5 +1566,143 @@ void bateria(){
 
 }
 
+void latinha(){
+	glColor3f(1.0f, 0.0f, 0.0f);
+
+	glBegin(GL_QUADS);
+		glVertex2f(8.0f, -9.0f);
+		glVertex2f(8.0f,9.0f);
+		glVertex2f(-7.0f,9.0f);
+		glVertex2f(-7.0f,-9.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, 9.0f);
+		glVertex2f(7.0f,11.0f);
+		glVertex2f(-6.0f,11.0f);
+		glVertex2f(-6.0f,9.0f);
+	
+	//sombra
+	glColor4f(0.0f, 0.0f, 0.0f, 0.2f);
+	glBegin(GL_QUADS);
+		glVertex2f(-2.0f,9.0f);
+		glVertex2f(-2.0f,11.0f);
+		glVertex2f(-7.0f,11.0);
+		glVertex2f(-7.0f,9.0f);
+	glBegin(GL_QUADS);
+		glVertex2f(-5.0f,-9.0f);
+		glVertex2f(-5.0f,9.0f);
+		glVertex2f(-8.0f,9.0);
+		glVertex2f(-8.0f,-9.0f);
+	
+	//luz
+	glColor4f(1.0f, 1.0f, 1.0f, 0.4f);
+
+	glBegin(GL_QUADS);
+		glVertex2f(5.0f,8.0f);
+		glVertex2f(5.0f,10.0f);
+		glVertex2f(2.0f,10.0f);
+		glVertex2f(2.0f,8.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(5.0f,7.0f);
+		glVertex2f(5.0f,9.0f);
+		glVertex2f(6.0f,9.0f);
+		glVertex2f(6.0f,7.0f);
+	
+	glColor3f(0.7f, 0.7f, 0.7f);
+	glBegin(GL_QUADS);
+		glVertex2f(8.0f, -10.0f);
+		glVertex2f(8.0f,-9.0f);
+		glVertex2f(-7.0f,-9.0f);
+		glVertex2f(-7.0f,-10.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, -11.0f);
+		glVertex2f(7.0f,-10.0f);
+		glVertex2f(-6.0f,-10.0f);
+		glVertex2f(-6.0f,-11.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, 12.0f);
+		glVertex2f(7.0f,13.0f);
+		glVertex2f(-6.0f,13.0f);
+		glVertex2f(-6.0f,12.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(6.0f, 11.0f);
+		glVertex2f(6.0f,12.0f);
+		glVertex2f(-5.0f,12.0f);
+		glVertex2f(-5.0f,11.0f);
+	
+	glColor3f(0.0f, 0.0f, 0.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(9.0f, -10.0f);
+		glVertex2f(9.0f,9.0f);
+		glVertex2f(8.0f,9.0f);
+		glVertex2f(8.0f,-10.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(-8.0f, -10.0f);
+		glVertex2f(-8.0f,9.0f);
+		glVertex2f(-7.0f,9.0f);
+		glVertex2f(-7.0f,-10.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(8.0f, 9.0f);
+		glVertex2f(8.0f,14.0f);
+		glVertex2f(7.0f,14.0f);
+		glVertex2f(7.0f,9.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(-6.0f, 9.0f);
+		glVertex2f(-6.0f,14.0f);
+		glVertex2f(-7.0f,14.0f);
+		glVertex2f(-7.0f,9.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, 13.0f);
+		glVertex2f(7.0f,14.0f);
+		glVertex2f(-6.0f,14.0f);
+		glVertex2f(-6.0f,13.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, 13.0f);
+		glVertex2f(7.0f,14.0f);
+		glVertex2f(6.0f,14.0f);
+		glVertex2f(6.0f,13.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, -12.0f);
+		glVertex2f(7.0f,-11.0f);
+		glVertex2f(-6.0f,-11.0f);
+		glVertex2f(-6.0f,-12.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(7.0f, 11.0f);
+		glVertex2f(7.0f,12.0f);
+		glVertex2f(6.0f,12.0f);
+		glVertex2f(6.0f,11.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(-5.0f, 11.0f);
+		glVertex2f(-5.0f,12.0f);
+		glVertex2f(-6.0f,12.0f);
+		glVertex2f(-6.0f,11.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(8.0f, -11.0f);
+		glVertex2f(8.0f,-10.0f);
+		glVertex2f(7.0f,-10.0f);
+		glVertex2f(7.0f,-11.0f);
+	
+	glBegin(GL_QUADS);
+		glVertex2f(-6.0f, -11.0f);
+		glVertex2f(-6.0f,-10.0f);
+		glVertex2f(-7.0f,-10.0f);
+		glVertex2f(-7.0f,-11.0f);	
+	
+	glEnd();
+}
 
 #endif
