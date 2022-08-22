@@ -9,10 +9,11 @@
 
 GLfloat tx, ty = 0;
 GLfloat win = 70;
-GLfloat R = 1, G = 0, B = 0;
+GLfloat R = 0, G = 0, B = 1;
 GLfloat pontuacao = 0.0;
 GLfloat vidas = 5.0;
 int numFigura;
+int lixeiraId = 0;
 
 void Inicializa(void){
 
@@ -64,14 +65,6 @@ void exibeCoordenada(float tx, float ty){
 }
 
 
-bool colorMatch(GLfloat qR, GLfloat qG,GLfloat qB){
-    if(qR == R && qG == G && qB == B){
-        return true;
-    }
-
-    return false;
-}
-
 bool colisao(){
 
     if((x1 >= tx && x1 <= tx + 5) && y1 == ty + 5){
@@ -92,7 +85,7 @@ void figuras (){
                 quadrado0();
             bool result = colisao();
             if(result){
-                if(colorMatch(q0R, q0G, q0B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -108,7 +101,7 @@ void figuras (){
             quadrado1();
             result = colisao();
             if(result){
-                if(colorMatch(q1R, q1G, q1B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -124,7 +117,7 @@ void figuras (){
             quadrado2();
             result = colisao();
             if(result){
-                if(colorMatch(q2R, q2G, q2B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -140,7 +133,7 @@ void figuras (){
             quadrado3();
             result = colisao();
             if(result){
-                if(colorMatch(q3R, q3G, q3B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -156,7 +149,7 @@ void figuras (){
             quadrado4();
             result = colisao();
             if(result){
-                if(colorMatch(q4R, q4G, q4B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -172,7 +165,7 @@ void figuras (){
             quadrado5();
             result = colisao();
             if(result){
-                if(colorMatch(q5R, q5G, q5B)){
+                if(lixeiraId == lixoId){
                     pontuacao++;
                 }else {
                     vidas--;
@@ -189,27 +182,123 @@ void figuras (){
 
 }
 
+void setLixeiraId(){
+    if(R == 0 && G == 0 && B == 1)
+        lixeiraId = 0;
+    if(R == 1 && G == 0 && B == 0)
+        lixeiraId = 1;
+    if(R == 0 && G == 1 && B == 0)
+        lixeiraId = 2;
+    if(R == 1 && G == 1 && B == 0)
+        lixeiraId = 3;
+    if(R == 0.75f && G == 0.54f && B == 0.33f)
+        lixeiraId = 4;
+    if(R == 0.128f && G == 0.128f && B ==0.128f)
+        lixeiraId = 5;
+}
+
+void lixeiraProximaCor(){
+    if(R == 0 && G == 0 && B == 1){
+        // Azul -> Vermelho
+        R = 1;
+        G = 0;
+        B = 0;
+        return;
+    }
+
+    if(R == 1 && G == 0 && B == 0){
+        // Vermelho -> Verde
+        R = 0;
+        G = 1;
+        B = 0;
+        return;
+    }
+
+     if(R == 0 && G == 1 && B == 0){
+        // Verde -> Amarelo
+        R = 1;
+        G = 1;
+        B = 0;
+        return;
+    }
+
+     if(R == 1 && G == 1 && B == 0){
+        // Amarelo -> Marrom
+        R =  0.75f;
+        G =  0.54f;
+        B = 0.33f;
+        return;
+    }
+
+    printf("R = %d, G = %d, B = %d", R, G, B);
+
+     if(R == 0.75f && G == 0.54f && B == 0.33f){
+       // Marrom -> Cinza
+        R = 0.128f;
+        G = 0.128f;
+        B = 0.128f;
+        return;
+    }
+
+}
+
+void lixeiraCorAnterior(){
+
+    if(R == 1 && G == 0 && B == 0){
+        // Vermelho -> Azul
+        R = 0;
+        G = 0;
+        B = 1;
+        return;
+    }
+
+     if(R == 0 && G == 1 && B == 0){
+        // Verde -> Vermelho
+        R = 1;
+        G = 0;
+        B = 0;
+        return;
+    }
+
+     if(R == 1 && G == 1 && B == 0){
+        // Amarelo -> Verde
+        R =  0;
+        G =  1;
+        B = 0;
+        return;
+    }
+
+     if(R == 0.75f && G == 0.54f && B == 0.33f){
+       // Marrom -> Amarelo
+        R = 1;
+        G = 1;
+        B = 0;
+        return;
+    }
+
+     if(R == 0.128f && G == 0.128f && B ==0.128f){
+       // Cinza -> Marrom
+        R =  0.75f;
+        G = 0.54f;
+        B = 0.33f;
+        return;
+    }
+}
+
 void GerenciaTeclado(unsigned char key, int x, int y)
 {
     switch (key) {
-            case 'R':
-            case 'r':// muda a cor da lata pra vermelho
-                     R = 1;
-                     G = 0;
-                     B = 0;
-                     break;
-            case 'G':
-            case 'g':// muda a cor da lata para verde
-                     R = 0;
-                     G = 1;
-                     B = 0;
-                     break;
-            case 'B':
-            case 'b':// muda a cor da lata para azul
-                     R = 0;
-                     G = 0;
-                     B = 1;
-                     break;
+            case 'A':
+            case 'a':// Muda cor da lixeira para a anterior
+                lixeiraCorAnterior();
+                setLixeiraId();
+            break;
+
+            case 'D':
+            case 'd':// Muda cor da lixeira para próxima
+                lixeiraProximaCor();
+                setLixeiraId();
+            break;
     }
     glutPostRedisplay();
 }
@@ -291,7 +380,7 @@ float p = tx;
 		if ( tx > win )
 			tx = win;
 	}
-	
+
 	glutPostRedisplay();
 }
 
@@ -310,7 +399,7 @@ void Desenha(void){
 	addVidas();
 	glPushMatrix();
 	//glTranslatef(tx,ty,0.0f);
-	
+
 	//lata de lixo
 	glTranslatef(tx,ty,0.0f);
 	contornoLataLixo();
@@ -320,7 +409,7 @@ void Desenha(void){
 	luzLataLixo();
 	sombraLataLixo();
 	glPopMatrix();
-	
+
 	//banana
 	glPushMatrix();
 	glScalef(0.5f, 0.5f, 1.0f);
@@ -329,7 +418,7 @@ void Desenha(void){
 	luzBanana();
 	sombraBanana();
 	glPopMatrix();
-	
+
 	//garrafa
 	glPushMatrix();
 	glScalef(1.5f, 1.5f, 1.5f);
@@ -337,7 +426,7 @@ void Desenha(void){
 	garrafa();
 	contornoGarrafa();
 	glPopMatrix();
-	
+
 	//papel
 	glPushMatrix();
 	glTranslatef(25.0f,-1.5f,0.0f);
@@ -348,7 +437,7 @@ void Desenha(void){
 	papelDetalhes();
 	sombraPapel();
 	glPopMatrix();
-	
+
 	//taca
 	glPushMatrix();
 	glScalef(0.2f, 0.2f, 0.2f);
@@ -356,7 +445,7 @@ void Desenha(void){
 	taca();
 	contornoTaca();
 	glPopMatrix();
-	
+
 	//latinha
 	glPushMatrix();
 	glScalef(0.2f, 0.2f, 0.2f);
@@ -364,14 +453,14 @@ void Desenha(void){
 	latinha();
 	glPopMatrix();
 
-	
+
 	//bateria
 	glPushMatrix();
 	glTranslatef(35.0f,0.0f,0.0f);
 	glScalef(0.7f, 0.7f, 0.7f);
 	bateria();
 	glPopMatrix();
-	
+
 	//figuras
 	glPushMatrix();
 	figuras();
