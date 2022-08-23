@@ -21,7 +21,7 @@ void Inicializa(void){
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(-20.0,20.0,-20.0,20.0);
 	void glPointSize(GLfloat size);
-
+	
 }
 
 void addPontuacao()
@@ -381,6 +381,7 @@ float p = tx;
 			tx = win;
 	}
 
+	exibeCoordenada(tx,ty);
 	glutPostRedisplay();
 }
 
@@ -392,7 +393,11 @@ void Desenha(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_BLEND);                                   //Transparência
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
+	
+	cenario();
+	
 	//glPushMatrix();
+	//glTranslatef(tx,ty,0.0f);
 	//ponto();
 	//glPopMatrix();
 	addPontuacao();
