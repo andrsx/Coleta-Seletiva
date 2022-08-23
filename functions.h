@@ -21,7 +21,7 @@ void Inicializa(void){
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(-20.0,20.0,-20.0,20.0);
 	void glPointSize(GLfloat size);
-	
+
 }
 
 void addPontuacao()
@@ -47,7 +47,7 @@ void addVidas(){
 
 	sprintf(textoVidas, "Vidas: %.1f", vidas);
 
-    glTranslatef(-38.0f, 30.0f,0.0f);
+    glTranslatef(-38.0f, 33.0f,0.0f);
     glRasterPos2f(0,0);
     DesenhaTexto(GLUT_BITMAP_9_BY_15,textoVidas);
     glPopMatrix();
@@ -288,6 +288,11 @@ void lixeiraCorAnterior(){
 void GerenciaTeclado(unsigned char key, int x, int y)
 {
     switch (key) {
+            case 'R':
+            case 'r':
+                pontuacao = 0;
+                vidas = 0;
+            break;
             case 'A':
             case 'a':// Muda cor da lixeira para a anterior
                 lixeiraCorAnterior();
@@ -393,9 +398,9 @@ void Desenha(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_BLEND);                                   //Transparência
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
-	
+
 	cenario();
-	
+
 	//glPushMatrix();
 	//glTranslatef(tx,ty,0.0f);
 	//ponto();
