@@ -82,7 +82,7 @@ void figuras (){
     bool result = false;
 	switch(numFigura){
 		case 0:{
-                quadrado0();
+              papel();
             bool result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -98,7 +98,7 @@ void figuras (){
           }
         break;
 		case 1:{
-            quadrado1();
+            garrafa();
             result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -114,7 +114,7 @@ void figuras (){
 		   }
         break;
 		case 2:{
-            quadrado2();
+            taca();
             result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -130,7 +130,7 @@ void figuras (){
         }
         break;
 		case 3: {
-            quadrado3();
+            latinha();
             result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -146,7 +146,7 @@ void figuras (){
         }
         break;
 		case 4:  {
-            quadrado4();
+            banana();
             result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -162,7 +162,7 @@ void figuras (){
         }
         break;
 		case 5: {
-            quadrado5();
+            bateria();
             result = colisao();
             if(result){
                 if(lixeiraId == lixoId){
@@ -330,7 +330,7 @@ void Timer(int value){
 
     y1 -= ystep;
     glutPostRedisplay();
-    glutTimerFunc(40,Timer, 1);
+    glutTimerFunc(200,Timer, 1);
 
 
     if( y1<-40){
@@ -370,13 +370,13 @@ float p = tx;
 
 	if(key == GLUT_KEY_LEFT)
 	{
-		tx-=3;
+		tx-=4;
 		if ( tx < -win )
 			tx = -win;
 	}
 	if(key == GLUT_KEY_RIGHT)
 	{
-		tx+=3;
+		tx+=4;
 		if ( tx > win )
 			tx = win;
 	}
@@ -406,7 +406,7 @@ void Desenha(void){
 	//glTranslatef(tx,ty,0.0f);
 
 	//lata de lixo
-	glTranslatef(tx,ty,0.0f);
+	glTranslatef(tx,-22.0f,0.0f);
 	contornoLataLixo();
 	latalixo(R,G,B);
 	sombraSimboloLataLixo();
@@ -415,56 +415,56 @@ void Desenha(void){
 	sombraLataLixo();
 	glPopMatrix();
 
-	//banana
-	glPushMatrix();
-	glScalef(0.5f, 0.5f, 1.0f);
-	banana();
-	contornoBanana();
-	luzBanana();
-	sombraBanana();
-	glPopMatrix();
+//	//banana
+//	glPushMatrix();
+//	glScalef(0.5f, 0.5f, 1.0f);
+//	banana();
+//	contornoBanana();
+//	luzBanana();
+//	sombraBanana();
+//	glPopMatrix();
 
 	//garrafa
-	glPushMatrix();
-	glScalef(1.5f, 1.5f, 1.5f);
-	glTranslatef(10.0f,0.0f,0.0f);
-	garrafa();
-	contornoGarrafa();
-	glPopMatrix();
+//	glPushMatrix();
+//	glScalef(1.5f, 1.5f, 1.5f);
+//	glTranslatef(10.0f,0.0f,0.0f);
+//	garrafa();
+//	contornoGarrafa();
+//	glPopMatrix();
 
 	//papel
-	glPushMatrix();
-	glTranslatef(25.0f,-1.5f,0.0f);
-	glScalef(0.6f, 0.6f, 0.6f);
-	papelContorno();
-	papel();
-	papelLinhas();
-	papelDetalhes();
-	sombraPapel();
-	glPopMatrix();
+//	glPushMatrix();
+//	glTranslatef(25.0f,-1.5f,0.0f);
+//	glScalef(0.6f, 0.6f, 0.6f);
+//	papelContorno();
+//	papel();
+//	papelLinhas();
+//	papelDetalhes();
+//	sombraPapel();
+//	glPopMatrix();
 
 	//taca
-	glPushMatrix();
-	glScalef(0.2f, 0.2f, 0.2f);
-	glTranslatef(-90.0f,0.0f,0.0f);
-	taca();
-	contornoTaca();
-	glPopMatrix();
+//	glPushMatrix();
+//	glScalef(0.2f, 0.2f, 0.2f);
+//	glTranslatef(-90.0f,0.0f,0.0f);
+//	taca();
+//	contornoTaca();
+//	glPopMatrix();
 
 	//latinha
-	glPushMatrix();
-	glScalef(0.2f, 0.2f, 0.2f);
-	glTranslatef(-60.0f,0.0f,0.0f);
-	latinha();
-	glPopMatrix();
+//	glPushMatrix();
+//	glScalef(0.2f, 0.2f, 0.2f);
+//	glTranslatef(-60.0f,0.0f,0.0f);
+//	latinha();
+//	glPopMatrix();
 
 
 	//bateria
-	glPushMatrix();
-	glTranslatef(35.0f,0.0f,0.0f);
-	glScalef(0.7f, 0.7f, 0.7f);
-	bateria();
-	glPopMatrix();
+//	glPushMatrix();
+//	glTranslatef(35.0f,0.0f,0.0f);
+//	glScalef(0.7f, 0.7f, 0.7f);
+//	bateria();
+//	glPopMatrix();
 
 	//figuras
 	glPushMatrix();

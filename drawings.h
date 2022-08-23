@@ -392,6 +392,10 @@ void sombraLataLixo(){
 /* -----------------------------*/
 
 void banana(){
+	lixoId = 4;
+	glPushMatrix ();
+	glTranslatef(x1,y1--,0.0f);
+	glScalef(0.47f, 0.47f, 0.47f);
     glColor3f(1.0f, 1.0f, 0.0f);
     glBegin(GL_QUADS);
 
@@ -515,11 +519,8 @@ void banana(){
         glVertex2f(5.0f,-0.5f);
         glVertex2f(5.0f,-1.5f);
 
-    glEnd();
 
-}
-
-void contornoBanana(){
+//CONTORNO BANANA
 	glColor3f(0.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
@@ -725,12 +726,9 @@ void contornoBanana(){
 		glVertex2f(2.5f,4.5f);
 		glVertex2f(2.0f,4.5f);
 		glVertex2f(2.0f,4.0f);
+    
+	//SOMBRA BANANA 
 
-
-	glEnd();
-}
-
-void sombraBanana (){
 	glColor4f(0.0f, 0.0f, 0.0f, 0.1f);
 	//sombracentral
 	glBegin(GL_QUADS);
@@ -824,13 +822,9 @@ void sombraBanana (){
 		glVertex2f(5.5f,-0.5f);
 		glVertex2f(5.0f,-0.5);
 		glVertex2f(5.0f,-1.5f);
-
-	glEnd();
-
-}
-
-void luzBanana(){
-    glColor4f(1.0f, 1.0f, 1.0f, 0.6f);
+		
+	//LUZ BANANA
+	 glColor4f(1.0f, 1.0f, 1.0f, 0.6f);
 
     glBegin(GL_QUADS);
         glVertex2f(0.0f,1.5f);
@@ -867,9 +861,8 @@ void luzBanana(){
         glVertex2f(-2.5f,-1.0f);
         glVertex2f(-4.0f,-1.0f);
         glVertex2f(-4.0f,-1.5f);
-
-
-    glEnd();
+	glEnd();
+	glPopMatrix();
 }
 
 /* -----------------------------*/
@@ -877,6 +870,59 @@ void luzBanana(){
 /* -----------------------------*/
 
 void papel(){
+	lixoId = 0;
+	glPushMatrix ();
+	glTranslatef(x1,y1--,0.0f);
+	glScalef(0.7f, 0.7f, 0.7f);
+	
+	//CONTORNO PAPEL
+	 glColor3f(0.0f, 0.0f, 0.0f);
+	glBegin(GL_QUADS);
+		//papel 1
+       	glVertex2f(4.0f,4.5f);
+        glVertex2f(4.0f,6.2f);
+        glVertex2f(-0.5f,6.2f);
+        glVertex2f(-0.5f,4.5f);
+        //papel 2
+       	glVertex2f(4.7f,3.0f);
+        glVertex2f(4.7f,5.5f);
+        glVertex2f(0.0f,5.5f);
+        glVertex2f(0.0f,3.0f);
+        //papel 2.2
+       	glVertex2f(0.5f,3.5f);
+        glVertex2f(0.5f,5.5f);
+        glVertex2f(-1.5f,5.5f);
+        glVertex2f(-1.5f,3.5f);
+        //papel 3
+       	glVertex2f(4.0f,2.0f);
+        glVertex2f(4.0f,4.0f);
+        glVertex2f(-0.5f,4.0f);
+        glVertex2f(-0.5f,2.0f);
+        //papel 4
+       	glVertex2f(3.5f,1.2f);
+        glVertex2f(3.5f,3.0f);
+        glVertex2f(-1.0f,3.0f);
+        glVertex2f(-1.0f,1.2f);
+        //papel 5
+       	glVertex2f(3.0f,0.2f);
+        glVertex2f(3.0f,2.2f);
+        glVertex2f(-1.5f,2.1f);
+        glVertex2f(-1.5f,0.7f);
+        //papel 6
+       	glVertex2f(2.5f,-0.5f);
+        glVertex2f(2.5f,1.2f);
+        glVertex2f(-2.0f,1.2f);
+        glVertex2f(-2.0f,-0.5f);
+        //papel 7
+       	glVertex2f(3.0f,-1.2f);
+        glVertex2f(3.0f,0.5f);
+        glVertex2f(-1.5f,0.5f);
+        glVertex2f(-1.5f,-1.2f);
+        //papel 8
+       	glVertex2f(3.5f,-1.9f);
+        glVertex2f(3.5f,-0.2f);
+        glVertex2f(-1.0f,-0.2f);
+        glVertex2f(-1.0f,-1.9f);
 	glColor3f(0.95f, 0.95f, 0.95f);
     glBegin(GL_QUADS);
 		//papel 1
@@ -924,11 +970,9 @@ void papel(){
         glVertex2f(3.0f,-0.7f);
         glVertex2f(-0.5f,-0.7f);
         glVertex2f(-0.5f,-1.4f);
-   glEnd();
-}
-
-void papelLinhas(){
-	glColor3f(0.0f, 0.0f, 0.0f);
+        
+        //LINHAS PAPEL
+        glColor3f(0.0f, 0.0f, 0.0f);
     glBegin(GL_QUADS);
     	//linha 1
        	glVertex2f(3.3f,4.2f);
@@ -955,11 +999,9 @@ void papelLinhas(){
         glVertex2f(1.7f,0.5f);
         glVertex2f(-0.5f,0.5f);
         glVertex2f(-0.5f,0.2f);
-    glEnd();
-}
-
-void papelDetalhes(){
-	glColor3f(1.000000f, 0.498000f, 0.0f);
+    
+    //DETALHES PAPEL
+    glColor3f(1.000000f, 0.498000f, 0.0f);
     glBegin(GL_QUADS);
 		//Detalhe 1
         glVertex2f(1.9f,-1.0);
@@ -971,62 +1013,10 @@ void papelDetalhes(){
         glVertex2f(1.9f,-0.6f);
         glVertex2f(2.5f,-0.6f);
         glVertex2f(2.5f,-1.3f);
-   glEnd();
-}
-
-void papelContorno(){
-	glColor3f(0.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-		//papel 1
-       	glVertex2f(4.0f,4.5f);
-        glVertex2f(4.0f,6.2f);
-        glVertex2f(-0.5f,6.2f);
-        glVertex2f(-0.5f,4.5f);
-        //papel 2
-       	glVertex2f(4.7f,3.0f);
-        glVertex2f(4.7f,5.5f);
-        glVertex2f(0.0f,5.5f);
-        glVertex2f(0.0f,3.0f);
-        //papel 2.2
-       	glVertex2f(0.5f,3.5f);
-        glVertex2f(0.5f,5.5f);
-        glVertex2f(-1.5f,5.5f);
-        glVertex2f(-1.5f,3.5f);
-        //papel 3
-       	glVertex2f(4.0f,2.0f);
-        glVertex2f(4.0f,4.0f);
-        glVertex2f(-0.5f,4.0f);
-        glVertex2f(-0.5f,2.0f);
-        //papel 4
-       	glVertex2f(3.5f,1.2f);
-        glVertex2f(3.5f,3.0f);
-        glVertex2f(-1.0f,3.0f);
-        glVertex2f(-1.0f,1.2f);
-        //papel 5
-       	glVertex2f(3.0f,0.2f);
-        glVertex2f(3.0f,2.2f);
-        glVertex2f(-1.5f,2.1f);
-        glVertex2f(-1.5f,0.7f);
-        //papel 6
-       	glVertex2f(2.5f,-0.5f);
-        glVertex2f(2.5f,1.2f);
-        glVertex2f(-2.0f,1.2f);
-        glVertex2f(-2.0f,-0.5f);
-        //papel 7
-       	glVertex2f(3.0f,-1.2f);
-        glVertex2f(3.0f,0.5f);
-        glVertex2f(-1.5f,0.5f);
-        glVertex2f(-1.5f,-1.2f);
-        //papel 8
-       	glVertex2f(3.5f,-1.9f);
-        glVertex2f(3.5f,-0.2f);
-        glVertex2f(-1.0f,-0.2f);
-        glVertex2f(-1.0f,-1.9f);
-   glEnd();
-
-}
-
-void sombraPapel(){
+    
+    //PAPEL CONTORNO
+    
+    //SOMBRA PAPEL
 	glColor4f(0.0f, 0.0f, 0.0f, 0.25f);
 	glBegin(GL_QUADS);
 		//pt1
@@ -1040,14 +1030,18 @@ void sombraPapel(){
         glVertex2f(-1.0f,5.0f);
         glVertex2f(-1.0f,4.5f);
     glEnd();
+    glPopMatrix();
 }
-
 
 /* -----------------------------*/
 /* ---------- GARRAFA  -------- */
 /* -----------------------------*/
 
 void garrafa(){
+	lixoId = 1;
+	glPushMatrix ();
+	glTranslatef(x1,y1--,0.0f);
+	glScalef(1.5f, 1.5f, 1.5f);
     glColor3f(0.0f, 1.0f, 1.0f);
     glBegin(GL_QUADS);
         //parte 1
@@ -1104,12 +1098,7 @@ void garrafa(){
         glVertex2f(-1.0f,-1.5f);
         glVertex2f(-1.0f,-1.7f);
     glEnd();
-
-}
-
-void contornoGarrafa(){
-
-    glColor3f(0.0f, 0.0f, 0.0f);
+	  glColor3f(0.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
 		glVertex2f(0.5f,1.7f);
@@ -1246,16 +1235,19 @@ void contornoGarrafa(){
 		glVertex2f(-1.0f,-1.7f);
 		glVertex2f(-1.0f,-1.9f);
 	glEnd();
-
+	glPopMatrix();
 }
-
 
 /* -----------------------------*/
 /* ----------- TAÇA  ---------- */
 /* -----------------------------*/
 
 void taca(){
-        glColor3f(0.0f, 1.0f, 1.0f);
+        lixoId = 2;
+		glPushMatrix ();
+		glTranslatef(x1,y1--,0.0f);
+		glScalef(0.2f, 0.2f, 0.2f);
+		glColor3f(0.95f, 0.95f, 0.95f);
     	glBegin(GL_QUADS);
         //parte 1
         glVertex2f(5.0f,9.0f);
@@ -1305,12 +1297,6 @@ void taca(){
         glVertex2f(-1.0f,-1.0f);
         glVertex2f(-1.0f,1.0f);
 
-
-    glEnd();
-
-}
-
-void contornoTaca(){
 	glColor3f(0.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
@@ -1449,7 +1435,8 @@ glBegin(GL_QUADS);
 		glVertex2f(-5.0f,-13.0f);
 
 
-	glEnd();
+    glEnd();
+	glPopMatrix();
 }
 
 /* -----------------------------*/
@@ -1457,7 +1444,10 @@ glBegin(GL_QUADS);
 /* -----------------------------*/
 
 void bateria(){
-
+	lixoId = 5;
+	glPushMatrix ();
+	glTranslatef(x1,y1--,0.0f);
+	glScalef(0.7f, 0.7f, 0.7f);
 	glBegin(GL_POINTS);
 		//Contorno - parte 1 (cima)
 		glColor3f(0.0f, 0.0f, 0.0f);
@@ -1568,6 +1558,7 @@ void bateria(){
 		glVertex2f(-2.0f,2.0f);
 		glVertex2f(-2.0f,1.5f);
 	glEnd();
+	glPopMatrix();
 
 }
 
@@ -1577,6 +1568,10 @@ void bateria(){
 /* -----------------------------*/
 
 void latinha(){
+	lixoId = 3;
+	glPushMatrix ();
+	glTranslatef(x1,y1--,0.0f);
+	glScalef(0.2f, 0.2f, 0.2f);
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
@@ -1713,6 +1708,7 @@ void latinha(){
 		glVertex2f(-7.0f,-11.0f);
 
 	glEnd();
+	glPopMatrix();
 }
 
 /* -----------------------------*/
