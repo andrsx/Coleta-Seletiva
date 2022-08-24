@@ -7,6 +7,8 @@
 #include "drawings.h"
 
 int main(void){
+	
+	/*
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(600,600);
 	glutCreateWindow("Projeto Final");
@@ -17,6 +19,10 @@ int main(void){
 	glutSpecialFunc(TeclasEspeciais);
 	glutKeyboardFunc(GerenciaTeclado);
 	//glutMouseFunc(GerenciaMouse);
-
+	*/
+	
+	iniciando();
+	menuSystem();
+	
 	glutMainLoop();
 }

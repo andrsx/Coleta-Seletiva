@@ -2,6 +2,7 @@
 #define FUNCTIONS
 #include <GL/glut.h>
 #include <windows.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -16,6 +17,208 @@ int numFigura;
 int lixeiraId = 0, animacao = 0;
 GLint estado = 0;
 
+// #####
+GLint win_width, win_height;
+GLuint texture_id[1];
+GLuint DataPos, imageSize;
+GLsizei Width,Height;
+//GLfloat win = 25;
+GLfloat xf, yf,winw, aspecto;
+
+void chamaDesenha();
+void SobreJogo();
+void Comandos();
+
+void ModifyWindownsSize(GLsizei w, GLsizei h) {
+    if(h == 0) h = 1;
+ 
+    win_width = w;
+    win_height = h;
+ 
+    aspecto = (float) win_width/win_height;
+ 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+ 
+    gluOrtho2D (-winw*aspecto, winw*aspecto, -winw, winw);
+}
+
+/* Função para carregar as imagens em BMP */
+
+void LoadBMP(char *filename) {
+    #define SAIR {fclose(fp_arquivo); return ;}
+    #define CTOI(C) (*(int*)&C)
+ 
+    GLubyte *image;
+    GLubyte Header[0x54];
+ 
+    FILE * fp_arquivo = fopen(filename,"rb");
+ 
+    if (fread(Header,1,0x36,fp_arquivo)!=0x36)
+    SAIR;
+ 
+    Width = CTOI(Header[0x12]);
+    Height = CTOI(Header[0x16]);
+    ( CTOI(Header[0x0A]) == 0 ) ? ( DataPos=0x36 ) : ( DataPos = CTOI(Header[0x0A]) );
+    imageSize=Width*Height*3;
+ 
+    image = (GLubyte *) malloc ( imageSize );
+    int retorno;
+    retorno = fread(image,1,imageSize,fp_arquivo);
+ 
+    int t, i;
+    for ( i = 0; i < imageSize; i += 3 ) {
+        t = image[i];
+        image[i] = image[i+2];
+        image[i+2] = t;
+    }
+ 
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+ 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    fclose (fp_arquivo);
+    free (image);
+    return ;
+}
+
+void T_Quads(GLuint *t_quad, int i, int x, int y, int w, int h) {
+    glBindTexture ( GL_TEXTURE_2D, t_quad[i] );
+    glBegin(GL_QUADS);
+ 
+    glTexCoord2f(0.0f, 0.0f);  glVertex2f(x, y);
+    glTexCoord2f(1.0f, 0.0f);  glVertex2f(x+w, y);
+    glTexCoord2f(1.0f, 1.0f);  glVertex2f(x+w, y+h);
+    glTexCoord2f(0.0f, 1.0f);  glVertex2f(x, y+h);
+    glEnd();
+}
+
+//Desenho da tela inicial
+void Draw(void) {
+ 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 
+    glViewport(0,0,win_width,win_height);
+    glEnable (GL_TEXTURE_2D);
+    gluOrtho2D (0,win_width, 0, win_height);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+ 
+    glGenTextures ( 1, texture_id );
+    glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
+ 
+    LoadBMP("imgs/telaInicial.bmp");
+    T_Quads( texture_id, 0, 0, 0, win_width, win_height);
+ 
+    glutSwapBuffers();
+}
+
+//Desenho da tela "Sobre o Jogo"
+void Draw2(void) {
+ 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 
+    glViewport(0,0,win_width,win_height);
+    glEnable (GL_TEXTURE_2D);
+    gluOrtho2D (0,win_width, 0, win_height);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+ 
+    glGenTextures ( 1, texture_id );
+    glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
+ 
+    LoadBMP("imgs/sobreOJogo.bmp");
+    T_Quads( texture_id, 0, 0, 0, win_width, win_height);
+ 
+    glutSwapBuffers();
+}
+
+//Comandos
+void Draw3(void) {
+ 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 
+    glViewport(0,0,win_width,win_height);
+    glEnable (GL_TEXTURE_2D);
+    gluOrtho2D (0,win_width, 0, win_height);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+ 
+    glGenTextures ( 1, texture_id );
+    glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
+ 
+    LoadBMP("imgs/comandos.bmp");
+    T_Quads( texture_id, 0, 0, 0, win_width, win_height);
+ 
+    glutSwapBuffers();
+}
+
+/* FIM DAS FUNÇÕES PARA IMPORTAR BMP*/
+
+void MouseManager(int button, int state, int x, int y) {
+ 
+    glutPostRedisplay();
+}
+
+void SpecialKeys(int key, int x, int y){
+ 
+    glutPostRedisplay();
+}
+
+// Menuzinho
+
+void menu(int key1)
+{	
+	switch(key1)
+	{
+		case 1: //Iniciar
+			chamaDesenha();				
+			break;
+		
+		case 2: //Sobre o Jogo
+		    SobreJogo();
+			break;
+			    
+		case 3: //Comandos    
+			Comandos();
+			break;
+		case 4: exit(0);
+		    break;	
+	}	
+}
+
+// Menuzinho parte 2
+
+void menuSystem() 
+{
+    glutCreateMenu(menu);
+    glutAddMenuEntry("Iniciar",1);
+    glutAddMenuEntry("Sobre o Jogo",2);
+    glutAddMenuEntry("Comandos",3);
+    glutAddMenuEntry("Sair",4);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void GerenciaMouse(int button, int state, int x, int y)
+{        
+    if (button == GLUT_RIGHT_BUTTON)
+         if (state == GLUT_DOWN) 
+            menuSystem();
+         
+    glutPostRedisplay();
+}
+
+/* Agora é que o bicho vai pegar */
+
 void Inicializa(void){
 
 	glClearColor(1.5f, 1.0f, 1.0f, 1.0f);
@@ -24,6 +227,52 @@ void Inicializa(void){
 	void glPointSize(GLfloat size);
 
 }
+
+void iniciando()
+{
+	glutInitDisplayMode(GLUT_DOUBLE| GLUT_RGB);
+	glutInitWindowPosition(5,5);
+	glutInitWindowSize(1920,1080);
+	glutCreateWindow("Coleta Seletiva & Interativa");
+	glutReshapeFunc(ModifyWindownsSize);
+	glutDisplayFunc(Draw);
+	glutMouseFunc(MouseManager);
+	glutSpecialFunc(SpecialKeys); 
+	glutMouseFunc(GerenciaMouse);   
+	Inicializa();
+	glutMainLoop();
+}
+
+void Teclado( unsigned char key, int x, int y)
+{
+		
+	switch(key)
+	{
+		case 27:
+			exit(0);
+			break;
+		case 'I':
+		case 'i':
+			iniciando();			
+			break;
+		}	
+		
+	glutPostRedisplay();	
+}
+
+
+/* ###### Continuar depois da função Desenha() ###### */
+
+/*
+void Inicializa(void){
+
+	glClearColor(1.5f, 1.0f, 1.0f, 1.0f);
+	glMatrixMode(GL_PROJECTION);
+	gluOrtho2D(-20.0,20.0,-20.0,20.0);
+	void glPointSize(GLfloat size);
+
+}
+*/
 
 void addPontuacao()
 {
@@ -496,6 +745,56 @@ void Desenha(void){
 
 }
 
+void chamaDesenha(){
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(600,600); 
+	glutCreateWindow("Coleta Seletiva e Interativa");
+	glutDisplayFunc(Desenha); //Aqui
+	glutReshapeFunc(AlteraTamanhoJanela);
+	glutTimerFunc(33, Timer, 1);
+	Inicializa();
+	glutSpecialFunc(TeclasEspeciais);
+	glutKeyboardFunc(GerenciaTeclado);
+	//glMatrixMode(GL_MODELVIEW);
+	//glutInitWindowPosition(5,5); 
+	
+	//glLoadIdentity();
+	
+	
+	//glutReshapeFunc(AlteraTamanhoJanela);
+	//glutKeyboardFunc (Teclado);
+	//Inicializa();
+	//glutMainLoop();
+} 
 
+ void SobreJogo()
+{
+	glutInitDisplayMode(GLUT_DOUBLE| GLUT_RGB);
+	glutInitWindowPosition(5,5);
+	glutInitWindowSize(1920,1080);
+	glutCreateWindow("Sobre o Jogo");
+	glutDisplayFunc(Draw2);
+	glutReshapeFunc(ModifyWindownsSize);
+	glutMouseFunc(MouseManager);
+	glutSpecialFunc(SpecialKeys);
+	//glutTimerFunc(150, Anima, 1);   
+	glutKeyboardFunc (Teclado);
+	glutMainLoop();	
+}
+
+void Comandos()
+{
+	glutInitDisplayMode(GLUT_DOUBLE| GLUT_RGB);
+	glutInitWindowPosition(5,5);
+	glutInitWindowSize(1920,1080);
+	glutCreateWindow("Sobre o Jogo");
+	glutDisplayFunc(Draw3);
+	glutReshapeFunc(ModifyWindownsSize);
+	glutMouseFunc(MouseManager);
+	glutSpecialFunc(SpecialKeys);
+	//glutTimerFunc(150, Anima, 1);   
+	glutKeyboardFunc (Teclado);
+	glutMainLoop();	
+}
 
 #endif
