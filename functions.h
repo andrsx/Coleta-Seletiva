@@ -13,7 +13,8 @@ GLfloat R = 0, G = 0, B = 1;
 GLfloat pontuacao = 0.0;
 GLfloat vidas = 5.0;
 int numFigura;
-int lixeiraId = 0;
+int lixeiraId = 0, animacao = 0;
+GLint estado = 0;
 
 void Inicializa(void){
 
@@ -65,6 +66,20 @@ void exibeCoordenada(float tx, float y1){
 }
 
 
+void GameOver(){
+	if (vidas == 0.0){
+	glColor3f(0,0,0);
+	glPushMatrix();
+    glColor3f(0.0,0.0,0.0);
+
+	sprintf(textoGameOver, "game over SEU LIXO rsrrs entendeu a referencia?", vidas);
+    glTranslatef(-25.0f, 0.0f,0.0f);
+    glRasterPos2f(0,0);
+    DesenhaTexto(GLUT_BITMAP_9_BY_15,textoGameOver);
+    glPopMatrix();
+    y1 = 50.0f;
+}
+}
 bool colisao(){
 
     if((x1 >= tx && x1 <= tx + 5) && y1 == -20 ){
@@ -179,7 +194,7 @@ void figuras (){
         break;
 
 	}
-
+GameOver();
 }
 
 void setLixeiraId(){
@@ -291,7 +306,9 @@ void GerenciaTeclado(unsigned char key, int x, int y)
             case 'R':
             case 'r':
                 pontuacao = 0;
-                vidas = 0;
+                vidas = 5;
+				y1= 45.0f;
+				y1--;
             break;
             case 'A':
             case 'a':// Muda cor da lixeira para a anterior
@@ -338,7 +355,7 @@ void Timer(int value){
 
 
     if( y1<-20){
-     	x1 = -70 + (rand() % 70); //varia a posiÃ§Ã£o
+     	x1 = -70 + (rand() % 70); //varia a posição
         y1 = 40.0f;//posiÃ§ao fixa
 
         numFigura = rand()%6;

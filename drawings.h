@@ -12,6 +12,7 @@ GLfloat x1 = 0.0f;
 GLfloat y1 = 40.0f;
 char textoPontuacao[30];
 char textoVidas[30];
+char textoGameOver[100];
 GLsizei rsize = 1;
 GLfloat q0R = 0, q0G = 0, q0B = 1, q0O = 1; // Azul
 GLfloat q1R = 1, q1G = 0, q1B = 0, q1O = 1; // Vermelho
@@ -200,7 +201,6 @@ void latalixo(GLfloat r, GLfloat g, GLfloat b){
 	glEnd();
 
 }
-
 void simboloLataLixo(){
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glPointSize(5.0f);
@@ -232,7 +232,6 @@ void simboloLataLixo(){
 		glVertex2f(-0.5f,-2.2f);
 	glEnd();
 }
-
 void sombraSimboloLataLixo(){
 
 	glColor4f(0.0f, 0.0f, 0.0f, 0.15f);
@@ -251,7 +250,6 @@ void sombraSimboloLataLixo(){
 	glEnd();
 
 }
-
 void contornoLataLixo(){
 
     glColor3f(0.0f, 0.0f, 0.0f);
@@ -313,7 +311,6 @@ void contornoLataLixo(){
 	glEnd();
 
 }
-
 void luzLataLixo(){
 	glColor4f(1.0f, 1.0f, 1.0f, 0.3f);
 
@@ -346,7 +343,6 @@ void luzLataLixo(){
 	glEnd();
 
 }
-
 void sombraLataLixo(){
 	glColor4f(0.0f, 0.0f, 0.0f, 0.1f);
 
