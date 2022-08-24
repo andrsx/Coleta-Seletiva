@@ -54,23 +54,23 @@ void addVidas(){
 }
 
 
-void exibeCoordenada(float tx, float ty){
+void exibeCoordenada(float tx, float y1){
 
 	float x = tx;
-	float y = ty;
+	float y = y1;
 
 	printf("x: %0.2f ", x);
-	printf("y: %0.2f \n", y);
+	printf("y1: %0.2f \n", y);
 
 }
 
 
 bool colisao(){
 
-    if((x1 >= tx && x1 <= tx + 5) && y1 == ty + 5){
+    if((x1 >= tx && x1 <= tx + 5) && y1 == -20 ){
 
         return true;
-    } else if((x1 <= tx && x1 >= tx - 5) && y1 == ty + 5){
+    } else if((x1 <= tx && x1 >= tx - 5) && y1 == -20 ){
 
         return true;
     }
@@ -91,7 +91,7 @@ void figuras (){
                     vidas--;
                 }
                 q0O = 0;
-            }else if(y1 == 0 - 6 &&  q0O == 1){
+            }else if(y1 == - 20 &&  q0O == 1){
                 q0O = 0;
                 vidas--;
             }
@@ -107,7 +107,7 @@ void figuras (){
                     vidas--;
                 }
                 q1O = 0;
-            }else if(y1 == 0 - 6 &&  q1O == 1){
+            }else if(y1 == -20 &&  q1O == 1){
                 q1O = 0;
                 vidas--;
             }
@@ -123,7 +123,7 @@ void figuras (){
                     vidas--;
                 }
                 q2O = 0;
-            }else if(y1 == 0 - 6 &&  q2O == 1){
+            }else if(y1 == -20 &&  q2O == 1){
                 q2O = 0;
                 vidas--;
             }
@@ -139,7 +139,7 @@ void figuras (){
                     vidas--;
                 }
                 q3O = 0;
-            }else if(y1 == 0 - 6 &&  q3O == 1){
+            }else if(y1 == -20 &&  q3O == 1){
                 q3O = 0;
                 vidas--;
             }
@@ -155,7 +155,7 @@ void figuras (){
                     vidas--;
                 }
                 q4O = 0;
-            }else if(y1 == 0 - 6 &&  q4O == 1){
+            }else if(y1 == -20 &&  q4O == 1){
                 q4O = 0;
                 vidas--;
             }
@@ -171,7 +171,7 @@ void figuras (){
                     vidas--;
                 }
                 q5O = 0;
-            }else if(y1 == 0 - 6 &&  q5O == 1){
+            }else if(y1 == -20 &&  q5O == 1){
                 q5O = 0;
                 vidas--;
             }
@@ -300,7 +300,7 @@ void GerenciaTeclado(unsigned char key, int x, int y)
             break;
 
             case 'D':
-            case 'd':// Muda cor da lixeira para próxima
+            case 'd':// Muda cor da lixeira para prÃ³xima
                 lixeiraProximaCor();
                 setLixeiraId();
             break;
@@ -333,14 +333,13 @@ void habilitarCorFugura(){
 
 void Timer(int value){
 
-    y1 -= ystep;
     glutPostRedisplay();
     glutTimerFunc(200,Timer, 1);
 
 
-    if( y1<-40){
-     	x1 = -70 + (rand() % 70); //varia a posição
-        y1 = 40.0f;//posiçao fixa
+    if( y1<-20){
+     	x1 = -70 + (rand() % 70); //varia a posiÃ§Ã£o
+        y1 = 40.0f;//posiÃ§ao fixa
 
         numFigura = rand()%6;
         habilitarCorFugura();
@@ -396,8 +395,8 @@ void Desenha(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_BLEND);                                   //Transparência
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //Transparência
+	glEnable(GL_BLEND);                                   //TransparÃªncia
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	  //TransparÃªncia
 
 	cenario();
 
