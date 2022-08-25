@@ -29,17 +29,18 @@ void chamaDesenha();
 void SobreJogo();
 void Comandos();
 
+
 void ModifyWindownsSize(GLsizei w, GLsizei h) {
     if(h == 0) h = 1;
-
+ 
     win_width = w;
     win_height = h;
-
+ 
     aspecto = (float) win_width/win_height;
-
+ 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
+ 
     gluOrtho2D (-winw*aspecto, winw*aspecto, -winw, winw);
 }
 
@@ -48,37 +49,37 @@ void ModifyWindownsSize(GLsizei w, GLsizei h) {
 void LoadBMP(char *filename) {
     #define SAIR {fclose(fp_arquivo); return ;}
     #define CTOI(C) (*(int*)&C)
-
+ 
     GLubyte *image;
     GLubyte Header[0x54];
-
+ 
     FILE * fp_arquivo = fopen(filename,"rb");
-
+ 
     if (fread(Header,1,0x36,fp_arquivo)!=0x36)
     SAIR;
-
+ 
     Width = CTOI(Header[0x12]);
     Height = CTOI(Header[0x16]);
     ( CTOI(Header[0x0A]) == 0 ) ? ( DataPos=0x36 ) : ( DataPos = CTOI(Header[0x0A]) );
     imageSize=Width*Height*3;
-
+ 
     image = (GLubyte *) malloc ( imageSize );
     int retorno;
     retorno = fread(image,1,imageSize,fp_arquivo);
-
+ 
     int t, i;
     for ( i = 0; i < imageSize; i += 3 ) {
         t = image[i];
         image[i] = image[i+2];
         image[i+2] = t;
     }
-
+ 
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
     glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-
+ 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     fclose (fp_arquivo);
     free (image);
@@ -88,7 +89,7 @@ void LoadBMP(char *filename) {
 void T_Quads(GLuint *t_quad, int i, int x, int y, int w, int h) {
     glBindTexture ( GL_TEXTURE_2D, t_quad[i] );
     glBegin(GL_QUADS);
-
+ 
     glTexCoord2f(0.0f, 0.0f);  glVertex2f(x, y);
     glTexCoord2f(1.0f, 0.0f);  glVertex2f(x+w, y);
     glTexCoord2f(1.0f, 1.0f);  glVertex2f(x+w, y+h);
@@ -98,107 +99,107 @@ void T_Quads(GLuint *t_quad, int i, int x, int y, int w, int h) {
 
 //Desenho da tela inicial
 void Draw(void) {
-
+ 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+ 
     glViewport(0,0,win_width,win_height);
     glEnable (GL_TEXTURE_2D);
     gluOrtho2D (0,win_width, 0, win_height);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+ 
     glGenTextures ( 1, texture_id );
     glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
-
+ 
     LoadBMP("imgs/telaInicial.bmp");
     T_Quads( texture_id, 0, 0, 0, win_width, win_height);
-
+ 
     glutSwapBuffers();
 }
 
 //Desenho da tela "Sobre o Jogo"
 void Draw2(void) {
-
+ 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+ 
     glViewport(0,0,win_width,win_height);
     glEnable (GL_TEXTURE_2D);
     gluOrtho2D (0,win_width, 0, win_height);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+ 
     glGenTextures ( 1, texture_id );
     glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
-
+ 
     LoadBMP("imgs/sobreOJogo.bmp");
     T_Quads( texture_id, 0, 0, 0, win_width, win_height);
-
+ 
     glutSwapBuffers();
 }
 
 //Comandos
 void Draw3(void) {
-
+ 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+ 
     glViewport(0,0,win_width,win_height);
     glEnable (GL_TEXTURE_2D);
     gluOrtho2D (0,win_width, 0, win_height);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+ 
     glGenTextures ( 1, texture_id );
     glBindTexture ( GL_TEXTURE_2D, texture_id[0] );
-
+ 
     LoadBMP("imgs/comandos.bmp");
     T_Quads( texture_id, 0, 0, 0, win_width, win_height);
-
+ 
     glutSwapBuffers();
 }
 
 /* FIM DAS FUN«’ES PARA IMPORTAR BMP*/
 
 void MouseManager(int button, int state, int x, int y) {
-
+ 
     glutPostRedisplay();
 }
 
 void SpecialKeys(int key, int x, int y){
-
+ 
     glutPostRedisplay();
 }
 
 // Menuzinho
 
 void menu(int key1)
-{
+{	
 	switch(key1)
 	{
 		case 1: //Iniciar
-			chamaDesenha();
+			chamaDesenha();				
 			break;
-
+		
 		case 2: //Sobre o Jogo
 		    SobreJogo();
 			break;
-
-		case 3: //Comandos
+			    
+		case 3: //Comandos    
 			Comandos();
 			break;
 		case 4: exit(0);
-		    break;
-	}
+		    break;	
+	}	
 }
 
 // Menuzinho parte 2
 
-void menuSystem()
+void menuSystem() 
 {
     glutCreateMenu(menu);
     glutAddMenuEntry("Iniciar",1);
@@ -209,11 +210,11 @@ void menuSystem()
 }
 
 void GerenciaMouse(int button, int state, int x, int y)
-{
+{        
     if (button == GLUT_RIGHT_BUTTON)
-         if (state == GLUT_DOWN)
+         if (state == GLUT_DOWN) 
             menuSystem();
-
+         
     glutPostRedisplay();
 }
 
@@ -237,15 +238,15 @@ void iniciando()
 	glutReshapeFunc(ModifyWindownsSize);
 	glutDisplayFunc(Draw);
 	glutMouseFunc(MouseManager);
-	glutSpecialFunc(SpecialKeys);
-	glutMouseFunc(GerenciaMouse);
+	glutSpecialFunc(SpecialKeys); 
+	glutMouseFunc(GerenciaMouse);   
 	Inicializa();
 	glutMainLoop();
 }
 
 void Teclado( unsigned char key, int x, int y)
 {
-
+		
 	switch(key)
 	{
 		case 27:
@@ -253,11 +254,11 @@ void Teclado( unsigned char key, int x, int y)
 			break;
 		case 'I':
 		case 'i':
-			iniciando();
+			iniciando();			
 			break;
-		}
-
-	glutPostRedisplay();
+		}	
+		
+	glutPostRedisplay();	
 }
 
 
@@ -321,7 +322,7 @@ void GameOver(){
 	glPushMatrix();
     glColor3f(0.0,0.0,0.0);
 
-	sprintf(textoGameOver, "game over SEU LIXO rsrrs entendeu a referencia?", vidas);
+	sprintf(textoGameOver, "GAME OVER! Pressione 'R' para resetar ou 'ESC' para fechar.", vidas);
     glTranslatef(-25.0f, 0.0f,0.0f);
     glRasterPos2f(0,0);
     DesenhaTexto(GLUT_BITMAP_9_BY_15,textoGameOver);
@@ -331,10 +332,10 @@ void GameOver(){
 }
 bool colisao(){
 
-    if((x1 >= tx && x1 <= tx + 5) && y1 == -20 ){
+    if((x1 >= tx && x1 <= tx + 5) && y1 == -18 ){
 
         return true;
-    } else if((x1 <= tx && x1 >= tx - 5) && y1 == -20 ){
+    } else if((x1 <= tx && x1 >= tx - 5) && y1 == -18 ){
 
         return true;
     }
@@ -355,7 +356,7 @@ void figuras (){
                     vidas--;
                 }
                 q0O = 0;
-            }else if(y1 == - 20 &&  q0O == 1){
+            }else if(y1 == - 18 &&  q0O == 1){
                 q0O = 0;
                 vidas--;
             }
@@ -371,7 +372,7 @@ void figuras (){
                     vidas--;
                 }
                 q1O = 0;
-            }else if(y1 == -20 &&  q1O == 1){
+            }else if(y1 == -18 &&  q1O == 1){
                 q1O = 0;
                 vidas--;
             }
@@ -387,7 +388,7 @@ void figuras (){
                     vidas--;
                 }
                 q2O = 0;
-            }else if(y1 == -20 &&  q2O == 1){
+            }else if(y1 == -18 &&  q2O == 1){
                 q2O = 0;
                 vidas--;
             }
@@ -403,7 +404,7 @@ void figuras (){
                     vidas--;
                 }
                 q3O = 0;
-            }else if(y1 == -20 &&  q3O == 1){
+            }else if(y1 == -18 &&  q3O == 1){
                 q3O = 0;
                 vidas--;
             }
@@ -419,7 +420,7 @@ void figuras (){
                     vidas--;
                 }
                 q4O = 0;
-            }else if(y1 == -20 &&  q4O == 1){
+            }else if(y1 == -18 &&  q4O == 1){
                 q4O = 0;
                 vidas--;
             }
@@ -435,7 +436,7 @@ void figuras (){
                     vidas--;
                 }
                 q5O = 0;
-            }else if(y1 == -20 &&  q5O == 1){
+            }else if(y1 == -18 &&  q5O == 1){
                 q5O = 0;
                 vidas--;
             }
@@ -569,6 +570,9 @@ void GerenciaTeclado(unsigned char key, int x, int y)
             case 'd':// Muda cor da lixeira para pr√≥xima
                 lixeiraProximaCor();
                 setLixeiraId();
+            break;    
+            case 27:
+            	exit(0);
             break;
     }
     glutPostRedisplay();
@@ -651,10 +655,9 @@ float p = tx;
 			tx = win;
 	}
 
-	exibeCoordenada(tx,ty);
+	//exibeCoordenada(tx,ty);
 	glutPostRedisplay();
 }
-
 
 void Desenha(void){
 
@@ -747,7 +750,7 @@ void Desenha(void){
 
 void chamaDesenha(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(600,600);
+	glutInitWindowSize(600,600); 
 	glutCreateWindow("Coleta Seletiva e Interativa");
 	glutDisplayFunc(Desenha); //Aqui
 	glutReshapeFunc(AlteraTamanhoJanela);
@@ -756,16 +759,16 @@ void chamaDesenha(){
 	glutSpecialFunc(TeclasEspeciais);
 	glutKeyboardFunc(GerenciaTeclado);
 	//glMatrixMode(GL_MODELVIEW);
-	//glutInitWindowPosition(5,5);
-
+	//glutInitWindowPosition(5,5); 
+	
 	//glLoadIdentity();
-
-
+	
+	
 	//glutReshapeFunc(AlteraTamanhoJanela);
 	//glutKeyboardFunc (Teclado);
 	//Inicializa();
 	//glutMainLoop();
-}
+} 
 
  void SobreJogo()
 {
@@ -777,9 +780,9 @@ void chamaDesenha(){
 	glutReshapeFunc(ModifyWindownsSize);
 	glutMouseFunc(MouseManager);
 	glutSpecialFunc(SpecialKeys);
-	//glutTimerFunc(150, Anima, 1);
+	//glutTimerFunc(150, Anima, 1);   
 	glutKeyboardFunc (Teclado);
-	glutMainLoop();
+	glutMainLoop();	
 }
 
 void Comandos()
@@ -792,9 +795,9 @@ void Comandos()
 	glutReshapeFunc(ModifyWindownsSize);
 	glutMouseFunc(MouseManager);
 	glutSpecialFunc(SpecialKeys);
-	//glutTimerFunc(150, Anima, 1);
+	//glutTimerFunc(150, Anima, 1);   
 	glutKeyboardFunc (Teclado);
-	glutMainLoop();
+	glutMainLoop();	
 }
 
 #endif
