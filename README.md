@@ -1,11 +1,13 @@
 # compGraficaProjetoFinal
 Projeto Final de Computação Gráfica
 
-Sobre o jogo
+Sobre o jogo:
 
 Coleta Seletiva & Interativa é um jogo simples que visa o aprendizado e a conscientização sobre a coleta seletiva de lixo. Aprenda jogando como descartar o lixo corretamente! 
 
-![alt text]([http://url/to/img.png](https://drive.google.com/uc?export=view&id=1vp5z37fCvF4CS1nqDkv8wayycvSfBGdI))
+Projeto desenvolvido por:
+
+Rhaissa Vasconcelos, Matheus Figueredo, Bruno Ikey e Daniel Andrade.
 
 ![1](https://user-images.githubusercontent.com/67202123/186740104-4681ea1a-e550-4d61-a4e4-7c61ad7ebe83.jpg)
 ![2](https://user-images.githubusercontent.com/67202123/186740130-b963fbcf-1a33-4b8e-a35d-24f7727cd17e.jpg)
