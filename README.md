@@ -25,6 +25,8 @@ Coleta Seletiva & Interativa é um jogo simples desenvolvido utilizando a biblio
 ![2](https://user-images.githubusercontent.com/67202123/186740130-b963fbcf-1a33-4b8e-a35d-24f7727cd17e.jpg)
 ![3](https://user-images.githubusercontent.com/67202123/186740139-52bf2686-f2dd-4952-b26c-c64d1f57eded.jpg)
 ![4](https://user-images.githubusercontent.com/67202123/186740150-dbb21b3a-10f0-4fc4-be82-26e79b3e8c5b.jpg)
+![5](https://github.com/andrsx/Coleta-Seletiva/blob/main/imgs/gif.gif?raw=true)
+
 
 ## Autores
 
